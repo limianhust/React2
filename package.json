@@ -15,5 +15,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://limianhust.github.io/React1"
+  "homepage": "https://limianhust.github.io/React1/build"
 }
