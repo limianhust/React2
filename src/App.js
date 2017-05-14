@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
-import './TodoInput'
+import 'normalize.css'
+import TodoInput from './TodoInput';
+
 class App extends Component {
   constructor(props){
     super(props)
