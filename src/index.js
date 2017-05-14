@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-//import App from './App';
+import App from './App';
 import './index.css';
-import Welcome from './Welcome'
+//import Welcome from './Welcome'
 
 // function Welcome(props) {
 //   const element = (<h1>Hello,{props.name}</h1>);
@@ -10,7 +10,7 @@ import Welcome from './Welcome'
 // }
 // Welcome({name: 'limian'})
 ReactDOM.render(
-  <Welcome/>,
+  <App/>,
   document.getElementById('root')
   );
 
