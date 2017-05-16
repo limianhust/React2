@@ -5,7 +5,19 @@
     justify-content: space-between;
     align-items: center;
 }
-.TodoItem>.item{
+.TodoItem .title{
     flex-grow: 1;
     padding: 0 .5em;
+    color: #333;
+}
+.TodoItem button{
+    padding: .5em 1em;
+    border-radius: .3em;
+    background-color: #4CAF50;
+    outline: none;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    letter-spacing: .2em;
 }
