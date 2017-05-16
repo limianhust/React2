@@ -65,7 +65,7 @@ class App extends Component {
     })
     console.log('addtodo')
     this.setState({
-      newTodo: 'jj',
+      newTodo: '',
       todoList: this.state.todoList
     })
 
