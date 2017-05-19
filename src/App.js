@@ -21,7 +21,8 @@ class App extends Component {
     .map((item, index) => {
       return (
         <li key={index}>
-          <TodoItem todo={item} onToggle={this.toggle.bind(this)}
+          <TodoItem todo={item} 
+          onToggle={this.toggle.bind(this)}
           onDelete={this.delete.bind(this)} />
         </li>
       )
@@ -62,7 +63,7 @@ class App extends Component {
       status: null,
       deleted: false
     })
-    console.log('addtodo')
+    //console.log('addtodo')
     this.setState({
       newTodo: '',
       todoList: this.state.todoList
