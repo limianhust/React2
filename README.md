@@ -95,3 +95,6 @@ todoList是数据，todos则是数据在 HTML 里的展现，两者绑定在一�
  ```onChange={this.changeTitle.bind(this)}```
 
 ，就是子组件向父组件通信。
+
+## 利用本地存储localStorage实现刷新后数据还在
+由于componentDidUpdate会在组件更新后调用，将存储函数写进componentDidUpdate里，每次数据更新后，组件会更新，调用存储函数实现数据存储同步更新。
