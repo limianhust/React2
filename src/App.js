@@ -5,14 +5,15 @@ import 'normalize.css'
 import './reset.css'
 import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
-import {save, load} from './localstore';
+//import {save, load} from './localstore';
+import UserDialog from './UserDialog'
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
       newTodo: '',
-      todoList: load('todoList') || []
+      todoList: []  //localStore.load('todoList')
     }
   }
   render() {
@@ -39,11 +40,12 @@ class App extends Component {
         <ol className='todoList'>
           {todos}
         </ol>
+        <UserDialog />
       </div>
     );
   }
   componentDidUpdate(){
-    save('todoList',this.state.todoList)
+    //save('todoList',this.state.todoList)
   }
   delete(event,todo){
     todo.deleted = true

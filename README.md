@@ -1,4 +1,5 @@
-## 我的第一个React App
+## 我的第二个React App
+在第一个React APP 基础上增加网络数据库存储功能，使用leancloud。
 ### 需求描述
 1. 用户在输入框写待办（Todo）
 2. 回车即表示添加 Todo

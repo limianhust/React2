@@ -1,0 +1,60 @@
+.UserDialog-wrapper{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.UserDialog{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    min-width: 20em;
+    background-color: #fff;
+    padding: 2em;
+    color: #333;
+    box-shadow: 0 0 0 1000px rgba(99,99,99,0.4);
+}
+.UserDialog nav{
+    width: 80%;
+    margin: 2em auto;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+.UserDialog nav:first-child{
+    padding: 1em;
+    margin-left: -2em;
+}
+.UserDialog nav:first-child label{
+    margin-left: 2em;
+    cursor: pointer;
+}
+.UserDialog .form-ct .row-ct{
+    margin: 1em;
+}
+.UserDialog .form-ct .row-ct input{
+    outline: none;
+    display: inline-block;
+    font-size: 18px;
+    height: 2em;
+    margin-left: 1em;
+}
+.UserDialog .form-ct .row-ct input:focus{
+    background-color: #57f050;
+}
+.UserDialog .form-ct .row-ct label{
+    display: inline-block;
+    width: 4em;
+    text-align: right;
+}
+.UserDialog .form-ct button{
+    display: inline-block;
+    padding: .5em 1em;
+    background: green;
+    border: 0;
+    color: #fff;
+    border-radius: 4px;
+}
