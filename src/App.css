@@ -17,6 +17,14 @@
 .App> .todoList> li:nth-child(even){
   background: transparent;
 }
+.App .logout{
+  float: right;
+  padding: .3em;
+  margin: 1em;
+  color: #333;
+  background: #ccc;
+  border-radius: .2em;
+}
 /*
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

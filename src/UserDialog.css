@@ -58,3 +58,11 @@
     color: #fff;
     border-radius: 4px;
 }
+.UserDialog .form-ct .signUpError{
+    color: red;
+    padding-top: 1em;
+}
+.UserDialog .form-ct .signInError{
+    color: red;
+    padding-top: 1em;
+}

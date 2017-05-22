@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './UserDialog.css';
-import { signUp } from './leancloud'
+import { signUp , signIn , signOut} from './leancloud'
 
 export default class UserDialog extends Component {
     constructor(props) {
@@ -11,7 +11,8 @@ export default class UserDialog extends Component {
                 username: '',
                 password: ''
             },
-            signUpState: ''
+            signUpError: '',
+            signInError: ''
         }
     }
     //用户名和密码注册
@@ -22,24 +23,63 @@ export default class UserDialog extends Component {
             console.log('注册成功')
             console.log(user)
             this.props.onSignUp(user)
-            
+
             // let stateCopy = JSON.parse(JSON.stringify(this.state))
             // stateCopy.signUpState = '注册成功'
             // //console.log(this.state)
             // this.setState(stateCopy)
         }
         let error = (error) => {
-            console.log(error)
+            console.log(error.code)
+            if (error.code === 202) {
+                this.setState({
+                    signUpError: '该用户名已经被注册, 请换个用户名重新注册'
+                })
+            }
 
         }
+
         signUp(username, password, success, error)
+
     }
+
+
     //用户名和密码登录
     signIn(e) {
         e.preventDefault()
         let { username, password } = this.state.formData
-
+        
+        let success = (user)=>{
+            console.log(user)
+            this.props.onSignIn(user)
+        }
+        let error = (error)=>{
+            console.log(error)
+            if(error.code === 201){
+                this.setState({
+                    signInError: '密码为空，请输入密码'
+                })
+            }
+            if(error.code === 200 ){
+                this.setState({
+                    signInError : '请输入用户名'
+                })
+            }
+            if(error.code === 210 ){
+                this.setState({
+                    signInError : '密码不正确'
+                })
+            }
+            if(error.code === 211 ){
+                this.setState({
+                    signInError : '找不到用户'
+                })
+            }
+        }
+        signIn(username,password,success,error)
+        
     }
+    
 
     changeFormData(key, e) {
         let stateCopy = JSON.parse(JSON.stringify(this.state))
@@ -47,18 +87,6 @@ export default class UserDialog extends Component {
         this.setState(stateCopy)
         //console.log(this.state)
     }
-    // changeUsername(e){
-    //     let stateCopy = JSON.parse(JSON.stringify(this.state))
-    //     stateCopy.formData.username = e.target.value
-    //     this.setState(stateCopy)
-    //     console.log(this.state)
-    // }
-    // changePassword(e){
-    //     let stateCopy = JSON.parse(JSON.stringify(this.state))
-    //     stateCopy.formData.password = e.target.value
-    //     this.setState(stateCopy)
-    //     console.log(this.state)
-    // }
     switch(e) {
         this.setState({
             selected: e.target.value
@@ -80,7 +108,8 @@ export default class UserDialog extends Component {
                 </div>
                 <div className="row actions">
                     <button type='submit' >注册</button>
-                    {/*<div className="signUpSuccess"> {this.state.signUpState} </div>*/}
+                    {this.state.signUpError === '' ? null : <div className="signUpError"> {this.state.signUpError} </div>}
+
                 </div>
             </form>
         )
@@ -99,6 +128,7 @@ export default class UserDialog extends Component {
                 </div>
                 <div className="row actions">
                     <button type='submit'>登陆</button>
+                    {this.state.signInError === '' ? null : <div className="signInError"> {this.state.signInError} </div> }
                 </div>
             </form>
 
@@ -111,15 +141,15 @@ export default class UserDialog extends Component {
                 <div className="UserDialog">
                     <nav>
                         <label>
-                            <input type="radio" value="signUp" 
-                            checked={this.state.selected === 'signUp'}
-                            onChange={this.switch.bind(this)}
-                             />注册
+                            <input type="radio" value="signUp"
+                                checked={this.state.selected === 'signUp'}
+                                onChange={this.switch.bind(this)}
+                            />注册
                         </label>
                         <label>
-                            <input type="radio" value="signIn" 
-                            checked={this.state.selected === 'signIn'} 
-                            onChange = {this.switch.bind(this)} />
+                            <input type="radio" value="signIn"
+                                checked={this.state.selected === 'signIn'}
+                                onChange={this.switch.bind(this)} />
                             登陆
                         </label>
                     </nav>
@@ -129,7 +159,7 @@ export default class UserDialog extends Component {
                     </div>
                     
                 </div>
-                
+
             </div>
 
         )

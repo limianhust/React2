@@ -19,26 +19,26 @@ export default class TodoInput extends Component {
     changeTitle(event) {
         this.props.onChange(event)
     }
-    shouldComponentUpdate(){
-		console.log('shouldComponentUpdate')
-        return true
-	}
-	componentWillUnmount(){
-		console.log('componentWillUnmount')
-	}
-	componentDidUpdate(){
-		console.log('componentDidUpdate')
-	}
-	componentWillUpdate(){
-		console.log('componentWillUpdate')
-	}
-	componentWillReceiveProps(){
-		console.log('componentWillReceiveProps')
-	}
-	componentWillMount(){
-		console.log('componentWillMount')
-	}
-	componentDidMount (){
-		console.log('componentDidMount')
-	}
+    // shouldComponentUpdate(){
+	// 	console.log('shouldComponentUpdate')
+    //     return true
+	// }
+	// componentWillUnmount(){
+	// 	console.log('componentWillUnmount')
+	// }
+	// componentDidUpdate(){
+	// 	console.log('componentDidUpdate')
+	// }
+	// componentWillUpdate(){
+	// 	console.log('componentWillUpdate')
+	// }
+	// componentWillReceiveProps(){
+	// 	console.log('componentWillReceiveProps')
+	// }
+	// componentWillMount(){
+	// 	console.log('componentWillMount')
+	// }
+	// componentDidMount (){
+	// 	console.log('componentDidMount')
+	// }
 }

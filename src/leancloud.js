@@ -39,3 +39,34 @@ function getUserFormAVUser(AVUser) {
         ...AVUser.attributes
     }
 }
+
+export function signIn(username,password,successFn,errorFn) {
+    
+    AV.User.logIn(username, password).then(function (loginedUser) {
+    let user = getUserFormAVUser(loginedUser)
+    successFn.call(null,user)
+  }, function (error) {
+      errorFn.call(null,error)
+  });
+}
+
+export function signOut() {
+    AV.User.logOut();
+    // 现在的 currentUser 是 null 了
+    var currentUser = AV.User.current();
+}
+
+//测试
+// var TestObject = AV.Object.extend('todo');
+// var testObject = new TestObject();
+// testObject.save({
+//   words: 'Hello limian!'
+// }).then(function(object) {
+//   alert('LeanCloud Rocks!');
+// })
+//数据库初始化
+
+
+export function data(item) {
+    
+}
