@@ -36,6 +36,11 @@ export default class UserDialog extends Component {
                     signUpError: '该用户名已经被注册, 请换个用户名重新注册'
                 })
             }
+            if (error.code === 217) {
+                this.setState({
+                    signUpError: '不能使用空白的用户名'
+                })
+            }
 
         }
 
