@@ -66,6 +66,11 @@ export function signOut() {
 // })
 //数据库初始化
 
+var TestObject
+export function init(user) {
+    var user = 
+    TestObject = AV.Object.extend('todoList');
+}
 
 export function data(item) {
     
