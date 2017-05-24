@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import './UserDialog.css';
-import { signUp , signIn , signOut} from './leancloud'
+import { signUp, signIn, signOut } from './leancloud'
 
 export default class UserDialog extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selected: 'signUp',
+            selected: 'signUp', //or 'signIn'
+            selectedTab: 'signInOrsignUp', //or 'forgotPassword'
             formData: {
+                email: '',
                 username: '',
                 password: ''
             },
@@ -18,7 +20,7 @@ export default class UserDialog extends Component {
     //用户名和密码注册
     signUp(e) {
         e.preventDefault()
-        let { username, password } = this.state.formData
+        let { email, username, password } = this.state.formData
         let success = (user) => {
             console.log('注册成功')
             console.log(user)
@@ -44,7 +46,7 @@ export default class UserDialog extends Component {
 
         }
 
-        signUp(username, password, success, error)
+        signUp(email, username, password, success, error)
 
     }
 
@@ -53,38 +55,38 @@ export default class UserDialog extends Component {
     signIn(e) {
         e.preventDefault()
         let { username, password } = this.state.formData
-        
-        let success = (user)=>{
+
+        let success = (user) => {
             console.log(user)
             this.props.onSignIn(user)
         }
-        let error = (error)=>{
+        let error = (error) => {
             console.log(error)
-            if(error.code === 201){
+            if (error.code === 201) {
                 this.setState({
                     signInError: '密码为空，请输入密码'
                 })
             }
-            if(error.code === 200 ){
+            if (error.code === 200) {
                 this.setState({
-                    signInError : '请输入用户名'
+                    signInError: '请输入用户名'
                 })
             }
-            if(error.code === 210 ){
+            if (error.code === 210) {
                 this.setState({
-                    signInError : '密码不正确'
+                    signInError: '密码不正确'
                 })
             }
-            if(error.code === 211 ){
+            if (error.code === 211) {
                 this.setState({
-                    signInError : '找不到用户'
+                    signInError: '找不到用户'
                 })
             }
         }
-        signIn(username,password,success,error)
-        
+        signIn(username, password, success, error)
+
     }
-    
+
 
     changeFormData(key, e) {
         let stateCopy = JSON.parse(JSON.stringify(this.state))
@@ -97,10 +99,26 @@ export default class UserDialog extends Component {
             selected: e.target.value
         })
     }
+
+    showForgotPassword(){
+        let stateCopy = JSON.parse(JSON.stringify(this.state))
+        stateCopy.selectedTab = 'forgotPassword'
+        this.setState(stateCopy)
+    }
+
+    resetPassword(){
+
+    }
+
     render() {
         let signUpForm = (
             <form action="get" className="sign-up"
                 onSubmit={this.signUp.bind(this)}  >
+                <div className="row-ct">
+                    <label htmlFor="">邮箱</label>
+                    <input type="text" value={this.state.formData.email}
+                        onChange={this.changeFormData.bind(this, 'email')} />
+                </div>
                 <div className="row-ct">
                     <label htmlFor="">用户名</label>
                     <input type="text" value={this.state.formData.username}
@@ -133,7 +151,8 @@ export default class UserDialog extends Component {
                 </div>
                 <div className="row actions">
                     <button type='submit'>登陆</button>
-                    {this.state.signInError === '' ? null : <div className="signInError"> {this.state.signInError} </div> }
+                    <a href="javascript:;" onClick={this.showForgotPassword.bind(this)} >忘记密码？</a>
+                    {this.state.signInError === '' ? null : <div className="signInError"> {this.state.signInError} </div>}
                 </div>
             </form>
 
@@ -141,30 +160,51 @@ export default class UserDialog extends Component {
         let signUpSuccess = (
             <div className="signUpSuccess"> {this.state.signUpState} </div>
         )
+
+        let signInOrsignUp = (
+            <div className="signInOrsignUp">
+                <nav>
+                    <label>
+                        <input type="radio" value="signUp"
+                            checked={this.state.selected === 'signUp'}
+                            onChange={this.switch.bind(this)}
+                        />注册
+                        </label>
+                    <label>
+                        <input type="radio" value="signIn"
+                            checked={this.state.selected === 'signIn'}
+                            onChange={this.switch.bind(this)} />
+                        登陆
+                        </label>
+                </nav>
+                <div className="form-ct">
+                    {this.state.selected === 'signUp' ? signUpForm : null}
+                    {this.state.selected === 'signIn' ? signInForm : null}
+                </div>
+            </div>
+        )
+
+        let forgotPassword = (
+            <div className="forgotPassword">
+                <h3>重置密码</h3>
+                <form>
+                    <div className="row">
+                        <label>邮箱</label>
+                        <input type="text" value={this.state.formData.email}
+                            Onchange={this.changeFormData.bind(this, 'email')} />
+                    </div>
+                    <div className="row actions">
+                        <button>发送重置邮件</button>
+                    </div>
+                </form>
+            </div>
+        )
+
         return (
             <div className='UserDialog-wrapper' >
                 <div className="UserDialog">
-                    <nav>
-                        <label>
-                            <input type="radio" value="signUp"
-                                checked={this.state.selected === 'signUp'}
-                                onChange={this.switch.bind(this)}
-                            />注册
-                        </label>
-                        <label>
-                            <input type="radio" value="signIn"
-                                checked={this.state.selected === 'signIn'}
-                                onChange={this.switch.bind(this)} />
-                            登陆
-                        </label>
-                    </nav>
-                    <div className="form-ct">
-                        {this.state.selected === 'signUp' ? signUpForm : null}
-                        {this.state.selected === 'signIn' ? signInForm : null}
-                    </div>
-                    
+                    {this.state.selectedTab === 'signInOrsignUp' ? signInOrsignUp : forgotPassword }
                 </div>
-
             </div>
 
         )

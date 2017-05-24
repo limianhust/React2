@@ -7,6 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: hsla(0, 0%, 0%, 0.40)
 }
 .UserDialog{
     border: 1px solid #ccc;
@@ -50,6 +51,16 @@
     width: 4em;
     text-align: right;
 }
+.UserDialog .form-ct .sign-in .row.actions{
+    padding-left: 7.6em; 
+    display: flex; 
+    align-items: center;
+}
+.UserDialog .form-ct .sign-in .row.actions a{
+    margin-left: .5em;
+    text-indent: none;
+    text-decoration: none;
+}
 .UserDialog .form-ct button{
     display: inline-block;
     padding: .5em 1em;
@@ -65,4 +76,32 @@
 .UserDialog .form-ct .signInError{
     color: red;
     padding-top: 1em;
+}
+.UserDialog .forgotPassword h3{
+    padding: 1em;
+
+}
+.UserDialog .forgotPassword .row label{
+    display: inline-block;
+    width: 4em;
+    text-align: right;
+}
+.UserDialog .forgotPassword .row input{
+    outline: none;
+    display: inline-block;
+    font-size: 18px;
+    height: 2em;
+    margin-left: 1em;
+} 
+.UserDialog .forgotPassword .row input:focus{
+    background-color: #57f050;
+}
+.UserDialog .forgotPassword .row button{
+    display: inline-block;
+    padding: .5em 1em;
+    margin-top: 1em;
+    background: green;
+    border: 0;
+    color: #fff;
+    border-radius: 4px;
 }

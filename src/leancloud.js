@@ -15,7 +15,7 @@ AV.init({ appId, appKey });
 
 export default AV
 
-export function signUp(username,password,successFn,errorFn) {
+export function signUp(email,username,password,successFn,errorFn) {
     // 用户名和密码注册，新建 AVUser 对象实例
   var user = new AV.User();
   // 设置用户名
@@ -23,7 +23,8 @@ export function signUp(username,password,successFn,errorFn) {
   // 设置密码
   user.setPassword(password);
   // 设置邮箱
-  //user.setEmail('tom@leancloud.cn');
+  user.setEmail(email);
+
   user.signUp().then(function (loginedUser) {
        let user = getUserFormAVUser(loginedUser)
       successFn.call(null,user)
@@ -65,10 +66,12 @@ export function signOut() {
 //   alert('LeanCloud Rocks!');
 // })
 //数据库初始化
+var TodoObject = AV.Object.extend('todoList');
+var todoObject;
 
 export function init(user) {
-    var user = 
-    TodoObject = AV.Object.extend('todoList');
+    
+    todoObject = new TodoObject();
 }
 
 export function data(item) {
