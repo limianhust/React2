@@ -7,12 +7,13 @@ import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 //import {save, load} from './localstore';
 import UserDialog from './UserDialog';
+import {getCurrentUser, signOut} from './leancloud'
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: {},
+      user: getCurrentUser() || {},
       newTodo: '',
       todoList: []  //localStore.load('todoList')
     }
@@ -73,6 +74,7 @@ class App extends Component {
     stateCopy.newTodo = ''
     stateCopy.todoList = []
     this.setState(stateCopy)
+    signOut()
   }
 
   componentDidUpdate() {

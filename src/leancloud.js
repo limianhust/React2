@@ -15,23 +15,32 @@ AV.init({ appId, appKey });
 
 export default AV
 
-export function signUp(email,username,password,successFn,errorFn) {
+export function signUp(email, username, password, successFn, errorFn) {
     // 用户名和密码注册，新建 AVUser 对象实例
-  var user = new AV.User();
-  // 设置用户名
-  user.setUsername(username);
-  // 设置密码
-  user.setPassword(password);
-  // 设置邮箱
-  user.setEmail(email);
+    var user = new AV.User();
+    // 设置用户名
+    user.setUsername(username);
+    // 设置密码
+    user.setPassword(password);
+    // 设置邮箱
+    user.setEmail(email);
 
-  user.signUp().then(function (loginedUser) {
-       let user = getUserFormAVUser(loginedUser)
-      successFn.call(null,user)
-  }, function (error) {
-      errorFn.call(null,error)
-  });
-  return undefined
+    user.signUp().then(function (loginedUser) {
+        let user = getUserFormAVUser(loginedUser)
+        successFn.call(null, user)
+    }, function (error) {
+        errorFn.call(null, error)
+    });
+    return undefined
+}
+
+export function getCurrentUser() {
+    let user = AV.User.current()
+    if (user) {
+        return user;
+    } else {
+        return null
+    }
 }
 
 function getUserFormAVUser(AVUser) {
@@ -41,14 +50,14 @@ function getUserFormAVUser(AVUser) {
     }
 }
 
-export function signIn(username,password,successFn,errorFn) {
-    
+export function signIn(username, password, successFn, errorFn) {
+
     AV.User.logIn(username, password).then(function (loginedUser) {
-    let user = getUserFormAVUser(loginedUser)
-    successFn.call(null,user)
-  }, function (error) {
-      errorFn.call(null,error)
-  });
+        let user = getUserFormAVUser(loginedUser)
+        successFn.call(null, user)
+    }, function (error) {
+        errorFn.call(null, error)
+    });
 }
 
 export function signOut() {
@@ -70,10 +79,15 @@ var TodoObject = AV.Object.extend('todoList');
 var todoObject;
 
 export function init(user) {
-    
+
     todoObject = new TodoObject();
 }
 
 export function data(item) {
-    
+
+}
+export function sendPasswordResetEmail(email,success,error) {
+    AV.User.requestPasswordReset(email).then(function (success) {
+    }, function (error) {
+    });
 }
