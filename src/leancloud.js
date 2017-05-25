@@ -43,7 +43,7 @@ export function getCurrentUser() {
     }
 }
 
-function getUserFormAVUser(AVUser) {
+export function getUserFormAVUser(AVUser) {
     return {
         id: AVUser.id,
         ...AVUser.attributes

@@ -18,12 +18,18 @@ class App extends Component {
       todoList: []  //localStore.load('todoList')
     }
     let user = getCurrentUser()
+    //console.log(user.name)
     
     
     if(user){
       TodoModel.getByUser(user,(todos)=>{
         let stateCopy = JSON.parse(JSON.stringify(this.state))
         stateCopy.todoList = todos
+        // console.log('转换前，')
+        // console.log(user)
+        user = getUserFormAVUser(user)
+        // console.log('转换后w')
+        // console.log(user)
         stateCopy.user = user
         this.setState(stateCopy)
       })
@@ -44,7 +50,7 @@ class App extends Component {
     return (
       <div className='App'>
         <div className="logout" onClick={this.onSignOut.bind(this)}  >登出</div>
-        <h1>{this.state.user.username || '我'}的待办</h1>
+        <h1>{this.state.user.username || '未登陆'}的待办</h1>
         
         <div className="inputWrapper">
           <TodoInput content={this.state.newTodo}
@@ -75,13 +81,18 @@ class App extends Component {
     //console.log(user)
     let stateCopy = JSON.parse(JSON.stringify(this.state))
     stateCopy.user = user
+    
     this.setState(stateCopy)
     //登陆成功后向云端拉取全部todoList更新到页面
     TodoModel.getByUser(user,(todos)=>{
         let stateCopy = JSON.parse(JSON.stringify(this.state))
         stateCopy.todoList = todos
         stateCopy.user = user
+        console.log('登陆成功后user.name')
+    console.log(user.name)
         this.setState(stateCopy)
+      },(error)=>{
+        console.log(error)
       })
     //init(user.id)
   }
