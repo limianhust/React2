@@ -98,6 +98,7 @@ class App extends Component {
     //save('todoList',this.state.todoList)
   }
   addTodo(event) {
+    //console.log(this.state.newTodo)
     this.state.todoList.push({
       id: idMaker(),
       title: event.target.value,

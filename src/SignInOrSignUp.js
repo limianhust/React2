@@ -37,7 +37,7 @@ export default class SignInOrSignUp extends Component{
                         onChangeFormData={this.props.onChangeFormData}
                         signUpError={this.props.signUpError} /> : null}
                     {this.state.selected === 'signIn' ? <SignInForm formData={this.props.formData}
-                        onSubmit={this.onSignIn}
+                        onSubmit={this.props.onSignIn}
                         onChangeFormData={this.props.onChangeFormData}
                         signInError={this.props.signInError}
                         onShowForgotPassword={this.props.onShowForgotPassword} /> : null}

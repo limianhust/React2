@@ -79,11 +79,11 @@ var TodoObject = AV.Object.extend('todoList');
 var todoObject;
 
 export function init(user) {
-
-    todoObject = new TodoObject();
+    var TodoObject = AV.Object.extend('todoList');
+    var todoObject = new TodoObject();
 }
 
-export function data(item) {
+export function save(item) {
 
 }
 export function sendPasswordResetEmail(email,success,error) {

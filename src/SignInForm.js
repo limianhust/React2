@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 
-export default class SignInForm extends Component{
+/*export default class SignInForm extends Component{
     constructor(props){
         super(props)
     }
@@ -26,4 +26,26 @@ export default class SignInForm extends Component{
             </form>
         )
     }   
+}*/
+export default function(props) {
+    return (
+            <form action="get" className="sign-in"
+                onSubmit={props.onSubmit}>
+                <div className="row-ct">
+                    <label htmlFor="">用户名</label>
+                    <input type="text" value={props.formData.username}
+                        onChange={props.onChangeFormData.bind(null, 'username')} />
+                </div>
+                <div className="row-ct">
+                    <label htmlFor="">密码</label>
+                    <input type="password" value={props.formData.password}
+                        onChange={props.onChangeFormData.bind(null, 'password')} />
+                </div>
+                <div className="row actions">
+                    <button type='submit'>登陆</button>
+                    <a href="javascript:;" onClick={props.onShowForgotPassword} >忘记密码？</a>
+                    {props.signInError === '' ? null : <div className="signInError"> {props.signInError} </div>}
+                </div>
+            </form>
+        )
 }
