@@ -24,6 +24,7 @@
   color: #333;
   background: #ccc;
   border-radius: .2em;
+  cursor: pointer;
 }
 /*
 .App-logo {

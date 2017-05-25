@@ -7,7 +7,7 @@ import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 //import {save, load} from './localstore';
 import UserDialog from './UserDialog';
-import {destroy,getByUser,TodoModel, getCurrentUser, signOut,init,save} from './leancloud'
+import {destroy,getByUser,TodoModel, getCurrentUser, signOut,init,save,getUserFormAVUser} from './leancloud'
 
 class App extends Component {
   constructor(props) {
@@ -18,7 +18,8 @@ class App extends Component {
       todoList: []  //localStore.load('todoList')
     }
     let user = getCurrentUser()
-    console.log(user)
+    
+    
     if(user){
       TodoModel.getByUser(user,(todos)=>{
         let stateCopy = JSON.parse(JSON.stringify(this.state))

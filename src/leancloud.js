@@ -89,10 +89,11 @@ export const TodoModel = {
         todo.set('title', title)
         todo.set('status', status)
         todo.set('deleted', deleted)
-        // 设置权限
+        //设置权限
         var acl = new AV.ACL();
         acl.setPublicReadAccess(false);
         acl.setWriteAccess(AV.User.current(), true);
+        acl.setReadAccess(AV.User.current(),true)
 
         // 将 ACL 实例赋予 Post 对象
         todo.setACL(acl);
@@ -104,7 +105,7 @@ export const TodoModel = {
         })
     },
     update(id) {
-        
+
     },
     destroy(id,successFn,errorFn) {
         //假如某一个 Todo 完成了，用户想要删除这个 Todo 对象，可以如下操作：
@@ -120,12 +121,15 @@ export const TodoModel = {
     getByUser(user, successFn, errorFn) {
         let query = new AV.Query('Todo')
         query.find().then((response) => {
+            console.log('response')
+            console.log(response)
             let array = response.map((t) => {
                 return {
                     id: t.id,
                     ...t.attributes
                 }
             })
+            console.log(array)
             successFn.call(null, array)
         }, (error) => {
             errorFn && errorFn.call(null, error)
