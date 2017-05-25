@@ -74,63 +74,61 @@ export function signOut() {
 // }).then(function(object) {
 //   alert('LeanCloud Rocks!');
 // })
-//数据库初始化
 
-
-export function init(user) {
-    var TodoObject = AV.Object.extend(user);
-    var todoObject = new TodoObject();
-    return todoObject
-}
-
-export function save(item) {
-    var TodoObject = AV.Object.extend('todoList');
-    var todoObject = new TodoObject();
-    todoObject.save(item).then(function(object) {
-        console.log('保存成功后返回的对象')
-        console.log(object)
-        console.log(object.id)
-    })
-}
-export function sendPasswordResetEmail(email,success,error) {
+export function sendPasswordResetEmail(email, success, error) {
     AV.User.requestPasswordReset(email).then(function (success) {
     }, function (error) {
     });
 }
 
-
+//向云端数据库操作
 export const TodoModel = {
-    create({status,title,deleted},successFn,errorFn){
+    create({ status, title, deleted }, successFn, errorFn) {
         let Todo = AV.Object.extend('Todo')
         let todo = new Todo()
-        todo.set('title',title)
-        todo.set('status',status)
-        todo.set('deleted',deleted)
-        todo.save().then(function(response){
-            successFn.call(null,response.id)
+        todo.set('title', title)
+        todo.set('status', status)
+        todo.set('deleted', deleted)
+        // 设置权限
+        var acl = new AV.ACL();
+        acl.setPublicReadAccess(false);
+        acl.setWriteAccess(AV.User.current(), true);
+
+        // 将 ACL 实例赋予 Post 对象
+        todo.setACL(acl);
+        todo.save().then(function (response) {
+            successFn.call(null, response.id)
             console.log(response)
-        },function (error) {
-            errorFn && errorFn.call(null,error)
+        }, function (error) {
+            errorFn && errorFn.call(null, error)
         })
     },
-    update(id){
-
+    update(id) {
+        
     },
-    destroy(){
-
+    destroy(id,successFn,errorFn) {
+        //假如某一个 Todo 完成了，用户想要删除这个 Todo 对象，可以如下操作：
+        var todo = AV.Object.createWithoutData('Todo', id);
+        todo.destroy().then(function (response) {
+            successFn && successFn.call(null,response)
+            // 删除成功
+        }, function (error) {
+            errorFn && errorFn.call(null)
+            // 删除失败
+        });
     },
-    getByUser(user,successFn,errorFn){
+    getByUser(user, successFn, errorFn) {
         let query = new AV.Query('Todo')
-        query.find().then((response)=>{
-            let array = response.map((t)=>{
+        query.find().then((response) => {
+            let array = response.map((t) => {
                 return {
                     id: t.id,
                     ...t.attributes
                 }
             })
-            successFn.call(null,array)
-        },(error)=>{
-            errorFn && errorFn.call(null,error)
+            successFn.call(null, array)
+        }, (error) => {
+            errorFn && errorFn.call(null, error)
         })
     }
 }

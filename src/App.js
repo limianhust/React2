@@ -7,7 +7,7 @@ import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 //import {save, load} from './localstore';
 import UserDialog from './UserDialog';
-import {getByUser,TodoModel, getCurrentUser, signOut,init,save} from './leancloud'
+import {destroy,getByUser,TodoModel, getCurrentUser, signOut,init,save} from './leancloud'
 
 class App extends Component {
   constructor(props) {
@@ -18,10 +18,12 @@ class App extends Component {
       todoList: []  //localStore.load('todoList')
     }
     let user = getCurrentUser()
+    console.log(user)
     if(user){
       TodoModel.getByUser(user,(todos)=>{
         let stateCopy = JSON.parse(JSON.stringify(this.state))
         stateCopy.todoList = todos
+        stateCopy.user = user
         this.setState(stateCopy)
       })
     }
@@ -73,6 +75,13 @@ class App extends Component {
     let stateCopy = JSON.parse(JSON.stringify(this.state))
     stateCopy.user = user
     this.setState(stateCopy)
+    //登陆成功后向云端拉取全部todoList更新到页面
+    TodoModel.getByUser(user,(todos)=>{
+        let stateCopy = JSON.parse(JSON.stringify(this.state))
+        stateCopy.todoList = todos
+        stateCopy.user = user
+        this.setState(stateCopy)
+      })
     //init(user.id)
   }
 
@@ -89,14 +98,23 @@ class App extends Component {
   componentDidUpdate() {
     //save('todoList',this.state.todoList)
   }
+  //删除todo
   delete(event, todo) {
-    todo.deleted = true
-    this.setState(this.state)
+    
+    TodoModel.destroy(todo.id,(response)=>{
+      todo.deleted = true
+      this.setState(this.state)
+      console.log(response)
+    })
     //save('todoList',this.state.todoList)
   }
   toggle(e, todo) {
+    let oldStatus = todo.status
     todo.status = todo.status === 'completed' ? '' : 'completed'
     this.setState(this.state)
+    TodoModel.update(todo,(todo)=>{
+      
+    })
     //save('todoList',this.state.todoList)
   }
   changeTitle(event) {
