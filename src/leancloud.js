@@ -75,19 +75,62 @@ export function signOut() {
 //   alert('LeanCloud Rocks!');
 // })
 //数据库初始化
-var TodoObject = AV.Object.extend('todoList');
-var todoObject;
+
 
 export function init(user) {
-    var TodoObject = AV.Object.extend('todoList');
+    var TodoObject = AV.Object.extend(user);
     var todoObject = new TodoObject();
+    return todoObject
 }
 
 export function save(item) {
-
+    var TodoObject = AV.Object.extend('todoList');
+    var todoObject = new TodoObject();
+    todoObject.save(item).then(function(object) {
+        console.log('保存成功后返回的对象')
+        console.log(object)
+        console.log(object.id)
+    })
 }
 export function sendPasswordResetEmail(email,success,error) {
     AV.User.requestPasswordReset(email).then(function (success) {
     }, function (error) {
     });
+}
+
+
+export const TodoModel = {
+    create({status,title,deleted},successFn,errorFn){
+        let Todo = AV.Object.extend('Todo')
+        let todo = new Todo()
+        todo.set('title',title)
+        todo.set('status',status)
+        todo.set('deleted',deleted)
+        todo.save().then(function(response){
+            successFn.call(null,response.id)
+            console.log(response)
+        },function (error) {
+            errorFn && errorFn.call(null,error)
+        })
+    },
+    update(id){
+
+    },
+    destroy(){
+
+    },
+    getByUser(user,successFn,errorFn){
+        let query = new AV.Query('Todo')
+        query.find().then((response)=>{
+            let array = response.map((t)=>{
+                return {
+                    id: t.id,
+                    ...t.attributes
+                }
+            })
+            successFn.call(null,array)
+        },(error)=>{
+            errorFn && errorFn.call(null,error)
+        })
+    }
 }

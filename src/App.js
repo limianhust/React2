@@ -7,7 +7,7 @@ import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 //import {save, load} from './localstore';
 import UserDialog from './UserDialog';
-import {getCurrentUser, signOut} from './leancloud'
+import {getByUser,TodoModel, getCurrentUser, signOut,init,save} from './leancloud'
 
 class App extends Component {
   constructor(props) {
@@ -16,6 +16,14 @@ class App extends Component {
       user: getCurrentUser() || {},
       newTodo: '',
       todoList: []  //localStore.load('todoList')
+    }
+    let user = getCurrentUser()
+    if(user){
+      TodoModel.getByUser(user,(todos)=>{
+        let stateCopy = JSON.parse(JSON.stringify(this.state))
+        stateCopy.todoList = todos
+        this.setState(stateCopy)
+      })
     }
   }
   render() {
@@ -65,6 +73,7 @@ class App extends Component {
     let stateCopy = JSON.parse(JSON.stringify(this.state))
     stateCopy.user = user
     this.setState(stateCopy)
+    //init(user.id)
   }
 
   //登出账号
@@ -99,19 +108,32 @@ class App extends Component {
   }
   addTodo(event) {
     //console.log(this.state.newTodo)
-    this.state.todoList.push({
-      id: idMaker(),
+    // this.state.todoList.push({
+    //   id: idMaker(),
+    //   title: event.target.value,
+    //   status: null,
+    //   deleted: false
+    // })
+    let newTodo = {
       title: event.target.value,
       status: null,
       deleted: false
+    }
+    TodoModel.create(newTodo,(id)=>{
+      newTodo.id = id
+      this.state.todoList.push(newTodo)
+      this.setState({
+        newTodo: '',
+        todoList: this.state.todoList
+      })
+    },(error)=>{
+      console.log(error)
     })
-    //save('todoList',this.state.todoList)
-    //console.log('addtodo')
     this.setState({
       newTodo: '',
       todoList: this.state.todoList
     })
-
+    
   }
 
 }
