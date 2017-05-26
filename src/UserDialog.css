@@ -13,7 +13,7 @@
     border: 1px solid #ccc;
     border-radius: 4px;
     min-width: 25em;
-    min-height: 300px;;
+    min-height: 320px;;
     background-color: #fff;
     
     color: #333;
@@ -90,11 +90,19 @@
     background: #2196f3;
     border: 0;
     color: #fff;
-    border-radius: 4px;
+    border-radius: 2px;
+}
+.UserDialog .form-ct .signUpError-ct{
+    width: 100%;
+    height: 32px;
+    color: red;
+    padding: .5em 0;
+    word-wrap: break-word; 
+    word-break: normal;
 }
 .UserDialog .form-ct .signUpError{
     color: red;
-    padding-top: 1em;
+   padding: .5em 0;
 }
 .UserDialog .form-ct .signInError{
     color: red;

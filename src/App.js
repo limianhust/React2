@@ -38,7 +38,7 @@ class App extends Component {
   render() {
     //未完成事项
     let todos = this.state.todoList
-      .filter((item) => !item.deleted && !(item.status === 'completed'))
+      .filter((item) => !item.deleted && !(item.status.status === 'completed'))
       .map((item, index) => {
         return (
           <li key={index}>
@@ -50,7 +50,7 @@ class App extends Component {
       })
     //已完成事项
     let done = this.state.todoList
-      .filter((item) => !item.deleted && (item.status === 'completed'))
+      .filter((item) => !item.deleted && (item.status.status === 'completed'))
       .map((item, index) => {
         return (
           <li key={index}>
@@ -145,12 +145,12 @@ class App extends Component {
   }
   //事项状态切换
   toggle(e, todo) {
-    let oldStatus = todo.status
+    let oldStatus = todo.status.status
     var newStatus = oldStatus === 'completed' ? '' : 'completed'
     // todo.status = todo.status === 'completed' ? '' : 'completed'
     // this.setState(this.state)
     TodoModel.update(todo.id,newStatus,()=>{
-      todo.status = todo.status === 'completed' ? '' : 'completed'
+      todo.status.status = todo.status.status === 'completed' ? '' : 'completed'
       this.setState(this.state)
     })
     //save('todoList',this.state.todoList)

@@ -47,8 +47,40 @@ export default class UserDialog extends Component {
             }
 
         }
-
-        signUp(email, username, password, success, error)
+        let emailReg = /\S+@\S+/
+        if(emailReg.test(email) && username.length>2 && password.length>5){
+            signUp(email, username, password, success, error)
+        } else if(!emailReg.test(email) && username.length>2 && password.length>5){
+            this.setState({
+                    signUpError: '请使用合法的邮箱地址'
+                })
+        } else if(emailReg.test(email) && username.length<3 && password.length>5){
+            this.setState({
+                    signUpError: '用户名长度必须不小于3'
+                })
+        } else if(emailReg.test(email) && username.length>2 && password.length<6){
+            this.setState({
+                    signUpError: '密码长度必须不小于6'
+                })
+        } else if(!emailReg.test(email) && username.length<3 && password.length>5){
+            this.setState({
+                    signUpError: '请使用合法的邮箱地址，用户名长度必须不小于3'
+                })
+        } else if(!emailReg.test(email) && username.length>2 && password.length<6){
+            this.setState({
+                    signUpError: '请使用合法的邮箱地址，且密码长度不小于6'
+                })
+        } else if(emailReg.test(email) && username.length<3 && password.length<6){
+            this.setState({
+                    signUpError: '用户名长度必须不小于3,且密码长度不小于6'
+                })
+        } else if(!emailReg.test(email) && username.length<3 && password.length<6){
+            this.setState({
+                    signUpError: '使用合法的邮箱地址，用户名长度不小于3,且密码长度不小于6'
+                })
+        }
+        
+        
 
     }
 
