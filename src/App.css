@@ -1,15 +1,44 @@
-
+/*iconfont资源*/
+@font-face {
+  font-family: 'iconfont';  /* project id 313030 */
+  src: url('https://at.alicdn.com/t/font_k5di0kcr1vt5ipb9.eot');
+  src: url('https://at.alicdn.com/t/font_k5di0kcr1vt5ipb9.eot?#iefix') format('embedded-opentype'),
+  url('https://at.alicdn.com/t/font_k5di0kcr1vt5ipb9.woff') format('woff'),
+  url('https://at.alicdn.com/t/font_k5di0kcr1vt5ipb9.ttf') format('truetype'),
+  url('https://at.alicdn.com/t/font_k5di0kcr1vt5ipb9.svg#iconfont') format('svg');
+}
 .App {
   text-align: center;
-  color: #333;
+  
   border: 1px solid #aaa;
   border-radius: 4px;
   background-color: #fff;
-  margin: 2em;
-  padding: 0 1em;
+  padding: 0;
   min-height: 20em;
-  min-width: 30em;
+  width: 100%;
   box-shadow: 0 0 1em hsla(0,0%,0%,0.15);
+}
+.App nav .user-iconfont{
+  font-family: iconfont;
+  font-size: 20px;
+  margin-left: .2em;
+  margin-right: .2em;
+  color: #fff;
+}
+.App nav .logout-iconfont{
+  font-family: iconfont;
+  font-size: 20px;
+  margin-left: .2em;
+  margin-right: .2em;
+  color: #fff;
+}
+.App nav{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  background-color: #2196f3;
+  color: #fff;
+  padding: .6em .2em;
 }
 .App  .todoList> li:nth-child(odd){
   background-color: #eee;
@@ -24,12 +53,8 @@
   background: transparent;
 }
 .App .logout{
-  float: right;
-  padding: .3em;
-  margin: 1em;
-  color: #333;
-  background: #ccc;
-  border-radius: .2em;
+  
+  
   cursor: pointer;
 }
 /*
