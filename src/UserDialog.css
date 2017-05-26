@@ -7,31 +7,48 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: hsla(0, 0%, 0%, 0.40)
+    background: url(./signIn.jpg)
 }
 .UserDialog{
     border: 1px solid #ccc;
     border-radius: 4px;
-    min-width: 20em;
+    min-width: 25em;
+    min-height: 300px;;
     background-color: #fff;
-    padding: 2em;
+    
     color: #333;
-    box-shadow: 0 0 0 1000px rgba(99,99,99,0.4);
+    /*box-shadow: 0 0 0 1000px rgba(99,99,99,0.4);*/
+}
+.UserDialog hr{
+    border: 0;
+    border-bottom: 1px solid #eee;
+    width: 95%;
+    margin: 0 auto;
 }
 .UserDialog nav{
-    width: 80%;
-    margin: 2em auto;
+    
+   
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-around;
 }
-.UserDialog nav:first-child{
-    padding: 1em;
-    margin-left: -2em;
+.UserDialog nav label{
+    width: 50%;
+    font-size: 18px;
+}
+.UserDialog nav label:first-child{
+    border-right: 1px solid #ccc;
 }
 .UserDialog nav:first-child label{
-    margin-left: 2em;
+    margin: 1em 0;
+    
     cursor: pointer;
+}
+.UserDialog nav:first-child label input[type=radio]{
+    display: none;
+}
+.UserDialog nav:first-child label input:checked ~ span{
+    color: red;
 }
 .UserDialog .form-ct .row-ct{
     margin: 1em;
@@ -44,27 +61,31 @@
     margin-left: 1em;
 }
 .UserDialog .form-ct .row-ct input:focus{
-    background-color: #57f050;
+    /*background-color: #57f050;*/
 }
 .UserDialog .form-ct .row-ct label{
     display: inline-block;
     width: 4em;
     text-align: right;
 }
-.UserDialog .form-ct .sign-in .row.actions{
-    padding-left: 7.6em; 
+.UserDialog .form-ct .row.actions{
+    /*padding-left: 7.6em; */
     display: flex; 
+    justify-content: center;
     align-items: center;
+    margin-top: 2em;
 }
 .UserDialog .form-ct .sign-in .row.actions a{
     margin-left: .5em;
+    text-align: center;
+    line-height: 100%;
     text-indent: none;
     text-decoration: none;
 }
 .UserDialog .form-ct button{
     display: inline-block;
-    padding: .5em 1em;
-    background: green;
+    padding: .5em 2em;
+    background: #2196f3;
     border: 0;
     color: #fff;
     border-radius: 4px;
@@ -76,32 +97,4 @@
 .UserDialog .form-ct .signInError{
     color: red;
     padding-top: 1em;
-}
-.UserDialog .forgotPassword h3{
-    padding: 1em;
-
-}
-.UserDialog .forgotPassword .row label{
-    display: inline-block;
-    width: 4em;
-    text-align: right;
-}
-.UserDialog .forgotPassword .row input{
-    outline: none;
-    display: inline-block;
-    font-size: 18px;
-    height: 2em;
-    margin-left: 1em;
-} 
-.UserDialog .forgotPassword .row input:focus{
-    background-color: #57f050;
-}
-.UserDialog .forgotPassword .row button{
-    display: inline-block;
-    padding: .5em 1em;
-    margin-top: 1em;
-    background: green;
-    border: 0;
-    color: #fff;
-    border-radius: 4px;
 }

@@ -2,35 +2,37 @@ import React, { Component } from 'react';
 import SignUpForm from './SignUpForm';
 import SignInForm from './SignInForm';
 
-export default class SignInOrSignUp extends Component{
-    constructor(props){
+export default class SignInOrSignUp extends Component {
+    constructor(props) {
         super(props)
-        this.state={
+        this.state = {
             selected: 'signUp'
         }
     }
-    onSwitch(e){
+    onSwitch(e) {
         let stateCopy = JSON.parse(JSON.stringify(this.state))
         stateCopy.selected = e.target.value
         this.setState(stateCopy)
     }
-    render(){
+    render() {
         return (
             <div className="signInOrsignUp">
                 <nav>
-                    <label>
+                    <label >
                         <input type="radio" value="signUp"
                             checked={this.state.selected === 'signUp'}
                             onChange={this.onSwitch.bind(this)}
-                        />注册
-                        </label>
+                        /> <span> 注册</span>
+                    </label>
+                    
                     <label>
                         <input type="radio" value="signIn"
                             checked={this.state.selected === 'signIn'}
                             onChange={this.onSwitch.bind(this)} />
-                        登陆
-                        </label>
+                        <span>登陆</span>
+                    </label>
                 </nav>
+                <hr/>
                 <div className="form-ct">
                     {this.state.selected === 'signUp' ? <SignUpForm formData={this.props.formData}
                         onSubmit={this.props.onSignUp}
