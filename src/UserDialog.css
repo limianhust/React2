@@ -49,6 +49,7 @@
 }
 .UserDialog nav:first-child label input:checked ~ span{
     color: red;
+    border-bottom: 2px solid red;
 }
 .UserDialog .form-ct .row-ct{
     margin: 1em;
@@ -59,9 +60,6 @@
     font-size: 18px;
     height: 2em;
     margin-left: 1em;
-}
-.UserDialog .form-ct .row-ct input:focus{
-    /*background-color: #57f050;*/
 }
 .UserDialog .form-ct .row-ct label{
     display: inline-block;
@@ -81,6 +79,10 @@
     line-height: 100%;
     text-indent: none;
     text-decoration: none;
+}
+.UserDialog .form-ct .sign-in .row.actions{
+    margin-top: 4em;
+    padding-left: 5em;
 }
 .UserDialog .form-ct button{
     display: inline-block;

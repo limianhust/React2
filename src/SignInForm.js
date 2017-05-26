@@ -44,8 +44,9 @@ export default function(props) {
                 <div className="row actions">
                     <button type='submit'>登陆</button>
                     <a href="javascript:;" onClick={props.onShowForgotPassword} >忘记密码？</a>
-                    {props.signInError === '' ? null : <div className="signInError"> {props.signInError} </div>}
+                    
                 </div>
+                {props.signInError === '' ? null : <div className="signInError"> {props.signInError} </div>}
             </form>
         )
 }
