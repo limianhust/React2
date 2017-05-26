@@ -93,7 +93,7 @@ export const TodoModel = {
         var acl = new AV.ACL();
         acl.setPublicReadAccess(false);
         acl.setWriteAccess(AV.User.current(), true);
-        acl.setReadAccess(AV.User.current(),true)
+        acl.setReadAccess(AV.User.current(), true)
 
         // 将 ACL 实例赋予 Post 对象
         todo.setACL(acl);
@@ -104,14 +104,21 @@ export const TodoModel = {
             errorFn && errorFn.call(null, error)
         })
     },
-    update(id) {
-
+    update(id,newStatus, successFn, errorFn) {
+        // 第一个参数是 className，第二个参数是 objectId
+        var todo = AV.Object.createWithoutData('Todo', id);
+        // 修改属性
+        todo.set('status', {'status': newStatus});
+        // 保存到云端
+        todo.save();
+        //console.log(j)
+        successFn()
     },
-    destroy(id,successFn,errorFn) {
+    destroy(id, successFn, errorFn) {
         //假如某一个 Todo 完成了，用户想要删除这个 Todo 对象，可以如下操作：
         var todo = AV.Object.createWithoutData('Todo', id);
         todo.destroy().then(function (response) {
-            successFn && successFn.call(null,response)
+            successFn && successFn.call(null, response)
             // 删除成功
         }, function (error) {
             errorFn && errorFn.call(null)

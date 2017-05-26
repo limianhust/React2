@@ -36,8 +36,21 @@ class App extends Component {
     }
   }
   render() {
+    //未完成事项
     let todos = this.state.todoList
-      .filter((item) => !item.deleted)
+      .filter((item) => !item.deleted && !(item.status === 'completed'))
+      .map((item, index) => {
+        return (
+          <li key={index}>
+            <TodoItem todo={item}
+              onToggle={this.toggle.bind(this)}
+              onDelete={this.delete.bind(this)} />
+          </li>
+        )
+      })
+    //已完成事项
+    let done = this.state.todoList
+      .filter((item) => !item.deleted && (item.status === 'completed'))
       .map((item, index) => {
         return (
           <li key={index}>
@@ -57,9 +70,19 @@ class App extends Component {
             onChange={this.changeTitle.bind(this)}
             onSubmit={this.addTodo.bind(this)} />
         </div>
-        <ol className='todoList'>
+        <div className="todo-wrapper">
+          <h3>未完成事项</h3>
+          <ol className='todoList'>
           {todos}
         </ol>
+        </div>
+        <div className="done-wrapper">
+          <h3>已完成事项</h3>
+          <ol className='doneList'>
+          {done}
+        </ol>
+        </div>
+        
         {this.state.user.id ? null : <UserDialog
           onSignUp={this.onSignUp.bind(this)}
           onSignIn={this.onSignIn.bind(this)} 
@@ -120,12 +143,15 @@ class App extends Component {
     })
     //save('todoList',this.state.todoList)
   }
+  //事项状态切换
   toggle(e, todo) {
     let oldStatus = todo.status
-    todo.status = todo.status === 'completed' ? '' : 'completed'
-    this.setState(this.state)
-    TodoModel.update(todo,(todo)=>{
-      
+    var newStatus = oldStatus === 'completed' ? '' : 'completed'
+    // todo.status = todo.status === 'completed' ? '' : 'completed'
+    // this.setState(this.state)
+    TodoModel.update(todo.id,newStatus,()=>{
+      todo.status = todo.status === 'completed' ? '' : 'completed'
+      this.setState(this.state)
     })
     //save('todoList',this.state.todoList)
   }
@@ -146,7 +172,7 @@ class App extends Component {
     // })
     let newTodo = {
       title: event.target.value,
-      status: null,
+      status: {status: ''},
       deleted: false
     }
     TodoModel.create(newTodo,(id)=>{
