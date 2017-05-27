@@ -1,11 +1,11 @@
 /*iconfont资源*/
 @font-face {
   font-family: 'iconfont';  /* project id 313030 */
-  src: url('https://at.alicdn.com/t/font_k5di0kcr1vt5ipb9.eot');
-  src: url('https://at.alicdn.com/t/font_k5di0kcr1vt5ipb9.eot?#iefix') format('embedded-opentype'),
-  url('https://at.alicdn.com/t/font_k5di0kcr1vt5ipb9.woff') format('woff'),
-  url('https://at.alicdn.com/t/font_k5di0kcr1vt5ipb9.ttf') format('truetype'),
-  url('https://at.alicdn.com/t/font_k5di0kcr1vt5ipb9.svg#iconfont') format('svg');
+  src: url('https://at.alicdn.com/t/font_hvbo16v0uoj8xgvi.eot');
+  src: url('https://at.alicdn.com/t/font_hvbo16v0uoj8xgvi.eot?#iefix') format('embedded-opentype'),
+  url('https://at.alicdn.com/t/font_hvbo16v0uoj8xgvi.woff') format('woff'),
+  url('https://at.alicdn.com/t/font_hvbo16v0uoj8xgvi.ttf') format('truetype'),
+  url('https://at.alicdn.com/t/font_hvbo16v0uoj8xgvi.svg#iconfont') format('svg');
 }
 .App {
   text-align: center;
@@ -40,17 +40,26 @@
   color: #fff;
   padding: .6em .2em;
 }
+.App .inputWrapper{
+  margin: 1em .2em;
+}
+.App .todo-wrapper h3{
+  margin: 1em 0;
+}
+.App .done-wrapper h3{
+  margin: 1em 0;
+}
 .App  .todoList> li:nth-child(odd){
   background-color: #eee;
 }
 .App .todoList> li:nth-child(even){
-  background: transparent;
+  background: #ddd;;
 }
 .App  .doneList> li:nth-child(odd){
   background-color: #eee;
 }
 .App .doneList> li:nth-child(even){
-  background: transparent;
+  background: #ddd;
 }
 .App .logout{
   

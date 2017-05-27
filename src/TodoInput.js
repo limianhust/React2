@@ -42,24 +42,29 @@ import './TodoInput.css'
 	// }
 }*/
 
-function submit(props,e) {
-	if (e.key == 'Enter') {
-		if(e.target.value.trim() !==''){
+function submit(props, e) {
+	if (e.keyCode == 13 && e.ctrlKey) {
+		if (e.target.value.trim() !== '') {
 			props.onSubmit(e)
 		}
 	}
 }
 
-function changeTitle(props,e) {
+function changeTitle(props, e) {
 	props.onChange(e)
 }
 
 export default function (props) {
 	return (
-	<input type='text' value={props.content}
-			className="TodoInput"
-			onChange={changeTitle.bind(null,props)}
-			onKeyPress={submit.bind(null,props)}
-		/>
+		<div className="TodoInput-ct">
+			<textarea type='text' value={props.content}
+				className="TodoInput"
+				onChange={changeTitle.bind(null, props)}
+				onKeyDown={submit.bind(null, props)}
+				placeholder="又有新事项啦？ctrl+enter提交事项"
+			></textarea>
+			{/*<span className="write-add-iconfont">&#xe62f;</span>*/}
+			<span className="cancel">+</span>
+		</div>
 	)
 }
