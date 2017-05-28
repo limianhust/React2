@@ -37,3 +37,15 @@
     stroke:#fff;
     stroke-width:2;
 }
+@media screen and (max-width:600px){
+    .TodoInput-ct #svg{
+        position: fixed;
+        bottom: 40px;
+        right: 10px;
+    }
+    .TodoInput-ct .TodoInput{
+        top: -90px;
+        width: 320px;
+        height: 200px;
+    }
+}

@@ -10,13 +10,9 @@
 .App {
   text-align: center;
   
-  border: 1px solid #aaa;
-  border-radius: 4px;
   background-color: #fff;
   padding: 0;
-  min-height: 20em;
   width: 100%;
-  box-shadow: 0 0 1em hsla(0,0%,0%,0.15);
 }
 .App nav .user-iconfont{
   font-family: iconfont;

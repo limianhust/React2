@@ -15,7 +15,7 @@
     display: flex;
     width: 90%;
     justify-content: center;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     margin-top: 50px;
     position: absolute;
     bottom: 0;
@@ -30,4 +30,32 @@
 }
 .footer a{
     text-decoration: none;
+}
+@media screen and (max-width:600px) {
+  .footer .weichat-linkin-github{
+    font-family: iconfont-footer;
+    font-size: 20px;
+    color: #555;
+    margin: 0 40px;
+}
+.footer{
+    display: flex;
+    width: 98%;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    position: absolute;
+    bottom: 0;
+}
+.footer span{
+    line-height: 14px;
+    margin: 0 5px;
+}
+.footer span.github{
+    font-size: 22px;
+    color: #2196f3;
+}
+.footer a{
+    text-decoration: none;
+}
 }
