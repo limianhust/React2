@@ -1,0 +1,33 @@
+@font-face {
+            font-family: 'iconfont-footer';  /* project id 231555 */
+            src: url('https://at.alicdn.com/t/font_di0edvxuz6m3g14i.eot');
+            src: url('https://at.alicdn.com/t/font_di0edvxuz6m3g14i.eot?#iefix') format('embedded-opentype'),
+            url('https://at.alicdn.com/t/font_di0edvxuz6m3g14i.woff') format('woff'),
+            url('https://at.alicdn.com/t/font_di0edvxuz6m3g14i.ttf') format('truetype'),
+            url('https://at.alicdn.com/t/font_di0edvxuz6m3g14i.svg#iconfont') format('svg');
+        }
+.footer .weichat-linkin-github{
+    font-family: iconfont-footer;
+    font-size: 40px;
+    color: #555;
+}
+.footer{
+    display: flex;
+    width: 90%;
+    justify-content: center;
+    flex-wrap: nowrap;
+    margin-top: 50px;
+    position: absolute;
+    bottom: 0;
+}
+.footer span{
+    line-height: 56px;
+    margin: 0 20px;
+}
+.footer span.github{
+    font-size: 47px;
+    color: #2196f3;
+}
+.footer a{
+    text-decoration: none;
+}

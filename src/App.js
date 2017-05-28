@@ -7,6 +7,7 @@ import TodoInput from './TodoInput';
 import TodoItem from './TodoItem';
 //import {save, load} from './localstore';
 import UserDialog from './UserDialog';
+import Footer from './Footer'
 import { destroy, getByUser, TodoModel, getCurrentUser, signOut, init, save, getUserFormAVUser } from './leancloud'
 
 class App extends Component {
@@ -96,7 +97,9 @@ class App extends Component {
           onSignUp={this.onSignUp.bind(this)}
           onSignIn={this.onSignIn.bind(this)}
           onSignOut={this.onSignOut.bind(this)} />}
+          <Footer />
       </div>
+      
     );
   }
 
