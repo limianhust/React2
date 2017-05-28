@@ -35,9 +35,12 @@
     width: 100px;
     height: 100px;
     transition: .5s;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translate3D(0, 0, 0);
 }
 .TodoInput-ct #svg.active{
     transform:rotate(45deg);
+    backface-visibility: hidden;
 }
 .TodoInput-ct #svg circle{
     fill:#ff4081;
