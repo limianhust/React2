@@ -44,22 +44,30 @@
   margin: 1em .2em;
 }
 .App .todo-wrapper h3{
-  margin: 1em 0;
+  margin: 1em 1em;
+  padding-bottom: .4em;
+  border-bottom: 1px solid #ccc;
 }
 .App .done-wrapper h3{
-  margin: 1em 0;
+  margin: 1em 1em;
+  padding-bottom: .4em;
+  border-bottom: 1px solid #ccc;
 }
 .App  .todoList> li:nth-child(odd){
   background-color: #eee;
+  margin: 0 .2em;
 }
 .App .todoList> li:nth-child(even){
-  background: #ddd;;
+  background: #ddd;
+  margin: 0 .2em;
 }
 .App  .doneList> li:nth-child(odd){
   background-color: #eee;
+  margin: 0 .2em;
 }
 .App .doneList> li:nth-child(even){
   background: #ddd;
+  margin: 0 .2em;
 }
 .App .logout{
   

@@ -13,6 +13,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      todoInput: false,
       user: getCurrentUser() || {},
       newTodo: '',
       todoList: []  //localStore.load('todoList')
@@ -63,21 +64,24 @@ class App extends Component {
     return (
       <div className='App'>
         <nav>
-          
           <p className="username"><span className="user-iconfont color">&#xe613;</span>
-          {this.state.user.username || '未登陆'}</p>
+            {this.state.user.username || '未登陆'}</p>
           <div className="logout" onClick={this.onSignOut.bind(this)} >
             <span className="logout-iconfont">&#xe618;</span>
             注销</div>
-          
+
         </nav>
         <div className="inputWrapper">
           <TodoInput content={this.state.newTodo}
+            todoInput={this.state.todoInput}
+            onChangeTodoInput={this.changeTodoInput.bind(this)}
+            todoInputStyle={this.state.todoInput? 'active': ''}
             onChange={this.changeTitle.bind(this)}
             onSubmit={this.addTodo.bind(this)} />
         </div>
         <div className="todo-wrapper">
           <h3>未完成事项</h3>
+          
           <ol className='todoList'>
             {todos}
           </ol>
@@ -88,13 +92,18 @@ class App extends Component {
             {done}
           </ol>
         </div>
-
         {this.state.user.id ? null : <UserDialog
           onSignUp={this.onSignUp.bind(this)}
           onSignIn={this.onSignIn.bind(this)}
           onSignOut={this.onSignOut.bind(this)} />}
       </div>
     );
+  }
+
+  changeTodoInput(){
+    let stateCopy = JSON.parse(JSON.stringify(this.state))
+    stateCopy.todoInput = stateCopy.todoInput===false? true: false
+    this.setState(stateCopy)
   }
 
   //注册成功回调函数

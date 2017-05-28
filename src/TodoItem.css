@@ -1,5 +1,6 @@
 .TodoItem{
     padding: .5em;
+    margin: .1em 1em;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
@@ -21,4 +22,9 @@
     text-decoration: none;
     color: #fff;
     letter-spacing: .2em;
+}
+.delete-iconfont{
+    font-family: iconfont;
+    font-size: 20px;
+    cursor: pointer;
 }

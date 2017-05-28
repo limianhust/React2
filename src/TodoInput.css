@@ -5,9 +5,12 @@
     outline: none;
     border: 0;
     background-color: #fbfbb3;
-    width: 30em;
+    width: 90%;
     height: 300px;
-    /*position: fixed;*/
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    box-shadow: 0 0 0 1000px rgba(200, 200, 200, .6)
     
 }
 .TodoInput-ct .write-add-iconfont {
@@ -23,16 +26,23 @@
     bottom: 20px;
     right: 20px;
 }
-.TodoInput-ct .cancel{
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    padding: .6em .8em;
-    background-color: red;
-    color: #fff;
-    border-radius: 50%;
+
+.TodoInput-ct #svg{
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
     cursor: pointer;
-    font-size: 28px;
-    font-weight: 700;
-    margin-left: 10px;
+    width: 100px;
+    height: 100px;
+    transition: .5s;
+}
+.TodoInput-ct #svg.active{
+    transform:rotate(45deg);
+}
+.TodoInput-ct #svg circle{
+    fill:#ff4081;
+}
+.TodoInput-ct #svg line{
+    stroke:#fff;
+    stroke-width:2;
 }

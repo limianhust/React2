@@ -55,16 +55,27 @@ function changeTitle(props, e) {
 }
 
 export default function (props) {
-	return (
-		<div className="TodoInput-ct">
+	let TodoInput = (
+		
 			<textarea type='text' value={props.content}
 				className="TodoInput"
 				onChange={changeTitle.bind(null, props)}
 				onKeyDown={submit.bind(null, props)}
 				placeholder="又有新事项啦？ctrl+enter提交事项"
 			></textarea>
-			{/*<span className="write-add-iconfont">&#xe62f;</span>*/}
-			<span className="cancel">+</span>
+		
+	)
+	return (
+
+		<div className="TodoInput-ct">
+			{props.todoInput? TodoInput:null}
+			<svg className={props.todoInputStyle} onClick={props.onChangeTodoInput} id='svg' xmlns="http://www.w3.org/2000/svg" version="1.1">
+				<circle cx="50" cy="50" r="30" />
+				<line x1="40" y1="50" x2="60" y2="50"
+					 />
+				<line x1="50" y1="40" x2="50" y2="60"
+					/>
+			</svg>
 		</div>
 	)
 }
